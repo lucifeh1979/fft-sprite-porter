@@ -1,0 +1,164 @@
+FFT SPRITE PORTER - CUSTOMIZE YOUR CHARACTERS
+Tutorial
+Classic FFT sprites (FFHacktics) in FINAL FANTASY TACTICS - The Ivalice Chronicles
+
+
+WHAT YOU NEED
+- The game, running through Reloaded-II with the FFTIVC Mod Loader. If you already use mods, you have both.
+- This mod, enabled in Reloaded-II.
+- A sprite made for the original game. You do not need any other tool.
+
+
+PART 1 - GET A SPRITE
+
+Sprites for the original game are shared on FFHacktics (ffhacktics.com, Sprites section). Each one is a single file:
+
+  .bmp   a sprite sheet, 256 x 488 pixels
+  .spr   the same sprite in the game's own format
+
+Either one works. If the download is a .zip or .rar, extract it first.
+
+Check two things before you pick one:
+
+1. The type. Human sprites come in two layouts, TYPE1 and TYPE2. The page of the sprite, or the sheet itself, usually
+   says which one it is, and it should be the same type as the character you are replacing. The mod cannot check this
+   for you. If you are not sure, try it: a sprite of the wrong type still shows up, but arms or heads sit in the wrong
+   place in some animations. That is your sign to pick another sprite or another character.
+
+2. It is a human sprite. Monsters and the Lucavi use a different kind of sheet and are not supported.
+
+
+PART 2 - PUT THE SPRITE IN THE GAME
+
+1. Open Reloaded-II and select FINAL FANTASY TACTICS - The Ivalice Chronicles.
+2. Click "FFT Sprite Porter - Customize your Characters" in the mod list, then click Open Folder.
+3. Open the Sprites folder. There is one folder for each character:
+
+     Agrias
+     Reis (human form)
+     Ramza (Chapter 1)
+     Ramza (all chapters)
+     Job - Knight (male)
+     ...
+
+   If the Sprites folder is empty, launch the game once and close it. The folders are created on the first run.
+
+4. Copy your sprite file into the folder of the character who should use it. Do not rename the folder. The name of the
+   file itself does not matter.
+5. Launch the game. That character now uses the new sprite, in battle and in story scenes.
+
+You never need to unzip, convert or reinstall anything. The mod converts the sprite each time the game starts.
+
+Good to know:
+- One sprite per folder. If a folder has more than one file, only the first in alphabetical order is used.
+- "Ramza (all chapters)" and "Delita (all chapters)" change every chapter at once. If you also put a file in a single
+  chapter's folder, that chapter uses its own file.
+- The same file can go in several folders if you want several characters to share it.
+- The sprite keeps its own colors. If it has several palettes, the extra ones are used as the alternate team colors.
+- The portrait in menus is not changed.
+- Folders starting with "Job - " are the generic jobs. They change every unit of that job and gender, yours and the
+  enemy's.
+
+
+PART 3 - REMOVE A SPRITE
+
+Delete the file from the character's folder and launch the game again. The original sprite is back.
+
+Nothing is saved anywhere else: the game files and your save are never touched. Disabling the mod in Reloaded-II
+brings every original sprite back at once, and your files stay in the folders for when you enable it again.
+
+
+PART 4 - IF SOMETHING LOOKS WRONG
+
+The character still has the original sprite
+  - Check that the file is inside the character's folder, not next to it, and that it ends in .bmp or .spr.
+  - Check that FFT Sprite Porter is enabled, and that you are playing the Enhanced version.
+  - Look at the log (see below). The mod says what it did with each file.
+
+The sprite shows up, but arms, heads or weapons are out of place in some animations
+  - The sprite is the other type (TYPE1 / TYPE2). Use a sprite of the right type for that character.
+
+A frame is empty or shows something odd during a story scene
+  - Sprites drawn for the original game can lack poses that some scenes use. This cannot be fixed by the mod.
+
+The colors are wrong
+  - Usually another mod is replacing the same character. Disable one of them.
+
+Reading the log
+  Reloaded-II keeps a log of every run in  %appdata%\Reloaded-Mod-Loader-II\Logs  (paste that in the address bar of a
+  folder window). Open the newest file and search for "FFT Sprite Porter". You will find one of these:
+
+    Agrias <- MySprite.bmp
+        The sprite was applied.
+    no sprites to port.
+        No .bmp or .spr file was found in any character folder.
+    folder "..." is not a character this mod knows - skipped.
+        The folder was renamed or created by hand. Use the folders the mod created.
+    "..." has 2 sprites, using ...
+        More than one file in the folder. Only the one named in the message is used.
+    MySprite.bmp: skipped (...)
+        The file could not be used. The text in parentheses says why. The usual reasons: the image is not 256 x 488,
+        or it was saved as a true-color image. A sprite sheet must stay an indexed image (16 or 256 colors), so if you
+        edit one, save it as an 8-bit .bmp.
+
+
+PART 5 - SHARE A SPRITE AS A MOD (for authors)
+
+You can publish a sprite as a mod of its own. It contains no code and no converted files, only the sprite, and it
+requires FFT Sprite Porter.
+
+1. Make a folder named after your mod id, for example  fftivc.sprite.agriasknight
+2. Inside it, create  Sprites\<character folder>\  with exactly the same folder name FFT Sprite Porter uses, and put
+   your sprite file there:
+
+     fftivc.sprite.agriasknight\
+       ModConfig.json
+       Sprites\
+         Agrias\
+           AgriasKnight.bmp
+
+3. Create ModConfig.json next to the Sprites folder:
+
+     {
+       "ModId": "fftivc.sprite.agriasknight",
+       "ModName": "Agrias as a Knight",
+       "ModAuthor": "Your name",
+       "ModVersion": "1.0.0",
+       "ModDescription": "Replaces Agrias' battle sprite. Sprite by <artist>. Requires FFT Sprite Porter.",
+       "ModDll": "",
+       "ModIcon": "",
+       "ModR2RManagedDll32": "",
+       "ModR2RManagedDll64": "",
+       "ModNativeDll32": "",
+       "ModNativeDll64": "",
+       "Tags": [],
+       "CanUnload": false,
+       "HasExports": false,
+       "IsLibrary": false,
+       "ReleaseMetadataFileName": "",
+       "IgnoreRegexes": [],
+       "IncludeRegexes": [],
+       "PluginData": {},
+       "IsUniversalMod": false,
+       "ModDependencies": [ "fftivc.utility.modloader", "fftivc.utility.spriteporter" ],
+       "OptionalDependencies": [],
+       "SupportedAppId": [ "fft_enhanced.exe" ],
+       "ProjectUrl": ""
+     }
+
+   Change only ModId, ModName, ModAuthor and ModDescription. The ModId must be the same as the folder name.
+
+4. Zip the folder and upload it. On your mod page, list FFT Sprite Porter as a requirement.
+
+Players install your zip like any other mod. If a player has put a sprite of their own in the same character's folder
+inside FFT Sprite Porter, theirs is used instead of yours.
+
+Sprites belong to the people who drew them. FFHacktics allows its sprites in mods as long as every artist is credited,
+so name them on your mod page.
+
+
+CHARACTERS YOU CAN REPLACE
+Ramza and Delita (each chapter), Argath, Zalbaag, Dycedarg, Duke Larg, Duke Goltanna, Ovelia, Orlandeau, Funebris,
+Reis (human form), Zalmour, Gaffgarion, Marach, Simon, Alma, Orran, Mustadio, Delacroix, Rapha, Elmdore, Tietra,
+Barrington, Agrias, Beowulf, Wiegraf (both looks), Valmafra, Ludovich, Folmarv, Loffrey, Isilud, Cletienne,
+Meliadoul, Barich, Celia, Lettie, Cloud, and every generic job (male and female).

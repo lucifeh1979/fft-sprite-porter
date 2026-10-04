@@ -1,0 +1,35 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net9.0-windows</TargetFramework>
+    <ModLoaderDir>..\Release\Mods\fftivc.utility.modloader</ModLoaderDir>
+    <AssemblyName>fftivc.utility.spriteporter</AssemblyName>
+    <RootNamespace>SpritePorter</RootNamespace>
+    <Nullable>disable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <NoWarn>MSB3277</NoWarn>
+    <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+    <GenerateDocumentationFile>false</GenerateDocumentationFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Reloaded.Mod.Interfaces" Version="2.4.0" ExcludeAssets="runtime" />
+    <Reference Include="fftivc.utility.modloader.Interfaces"><HintPath>$(ModLoaderDir)\fftivc.utility.modloader.Interfaces.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="FF16Tools.Files"><HintPath>$(ModLoaderDir)\FF16Tools.Files.dll</HintPath></Reference>
+    <Reference Include="FF16Tools.Shared"><HintPath>$(ModLoaderDir)\FF16Tools.Shared.dll</HintPath></Reference>
+    <Reference Include="Syroot.BinaryData"><HintPath>$(ModLoaderDir)\Syroot.BinaryData.dll</HintPath></Reference>
+    <Reference Include="Syroot.BinaryData.Core"><HintPath>$(ModLoaderDir)\Syroot.BinaryData.Core.dll</HintPath></Reference>
+    <Reference Include="Syroot.BinaryData.Memory"><HintPath>$(ModLoaderDir)\Syroot.BinaryData.Memory.dll</HintPath></Reference>
+    <Reference Include="CommunityToolkit.HighPerformance"><HintPath>$(ModLoaderDir)\CommunityToolkit.HighPerformance.dll</HintPath></Reference>
+    <Reference Include="Microsoft.Extensions.Logging.Abstractions"><HintPath>$(ModLoaderDir)\Microsoft.Extensions.Logging.Abstractions.dll</HintPath></Reference>
+    <Reference Include="System.IO.Hashing"><HintPath>$(ModLoaderDir)\System.IO.Hashing.dll</HintPath></Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\spriteporter\SheetCore.cs" Link="SheetCore.cs" />
+    <EmbeddedResource Include="..\spriteporter\data\characters.json" LogicalName="characters.json" />
+    <None Include="$(ModLoaderDir)\Nex\Layouts\ffto\CharCLUT.layout" Link="Nex\Layouts\ffto\CharCLUT.layout" CopyToOutputDirectory="PreserveNewest" />
+    <None Include="$(ModLoaderDir)\Nex\Layouts\ffto\CharShape.layout" Link="Nex\Layouts\ffto\CharShape.layout" CopyToOutputDirectory="PreserveNewest" />
+    <None Include="ModConfig.json" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+  <Target Name="PruneUnusedDependencies" AfterTargets="Build">
+    <Delete Files="$(OutDir)Vortice.DXGI.dll;$(OutDir)Vortice.Direct3D12.dll;$(OutDir)Vortice.DirectStorage.dll;$(OutDir)Vortice.DirectX.dll;$(OutDir)Vortice.Mathematics.dll;$(OutDir)SharpGen.Runtime.dll;$(OutDir)SharpGen.Runtime.COM.dll;$(OutDir)SixLabors.ImageSharp.dll;$(OutDir)Pfim.dll;$(OutDir)Hjg.Pngcs.dll;$(OutDir)Iconic.Zlib.Netstandard.dll;$(OutDir)Microsoft.Extensions.DependencyInjection.Abstractions.dll;$(OutDir)$(AssemblyName).pdb" />
+  </Target>
+</Project>

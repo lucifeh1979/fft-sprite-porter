@@ -1,0 +1,30 @@
+FFT SPRITE PORTER - MOD MAKER
+Turn your FFT sprite into a mod for The Ivalice Chronicles in one minute.
+
+
+1. Run FFTSpritePorter.exe.
+
+2. Drag your sprite onto the window.
+   It takes the same files you already make: the 256x488 .bmp sheet or the .spr.
+
+3. Tick the character or job that should get it.
+
+4. Type the mod name, your name and the sprite artist.
+
+5. Click "Create mod (.zip)".
+
+That zip is the finished mod. Upload it to Nexus as it is.
+Players drag it into Reloaded-II, enable it and play. They need nothing else from you.
+
+
+THREE THINGS TO KNOW
+
+- Use the original file. If the .bmp was re-saved as true color or converted from a .png, the colors come out wrong.
+- The sprite keeps its own palette. Extra palettes in the file become the alternate team colors.
+- The sheet type has to match the character: a TYPE1 sprite on a TYPE1 character, TYPE2 on TYPE2.
+  If arms or heads look out of place in the game, it is the other type.
+
+
+If the tool does not open, install the .NET 9 Desktop Runtime (x64) from Microsoft. Anyone who uses Reloaded-II already has it.
+
+Portraits are not changed. Monsters and Lucavi are not supported.

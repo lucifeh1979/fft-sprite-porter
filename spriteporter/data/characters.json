@@ -1,0 +1,661 @@
+[
+ {
+  "name": "Ramza (Chapter 1)",
+  "group": "Characters",
+  "tex": 830,
+  "ids": [
+   1
+  ]
+ },
+ {
+  "name": "Ramza (Chapters 2-3)",
+  "group": "Characters",
+  "tex": 832,
+  "ids": [
+   2
+  ]
+ },
+ {
+  "name": "Ramza (Chapter 4)",
+  "group": "Characters",
+  "tex": 834,
+  "ids": [
+   3
+  ]
+ },
+ {
+  "name": "Delita (Chapter 1)",
+  "group": "Characters",
+  "tex": 836,
+  "ids": [
+   4
+  ]
+ },
+ {
+  "name": "Delita (Chapters 2-3)",
+  "group": "Characters",
+  "tex": 838,
+  "ids": [
+   5
+  ]
+ },
+ {
+  "name": "Delita (Chapter 4)",
+  "group": "Characters",
+  "tex": 840,
+  "ids": [
+   6
+  ]
+ },
+ {
+  "name": "Argath",
+  "group": "Characters",
+  "tex": 842,
+  "ids": [
+   7
+  ]
+ },
+ {
+  "name": "Zalbaag",
+  "group": "Characters",
+  "tex": 844,
+  "ids": [
+   8
+  ]
+ },
+ {
+  "name": "Dycedarg",
+  "group": "Characters",
+  "tex": 846,
+  "ids": [
+   9
+  ]
+ },
+ {
+  "name": "Duke Larg",
+  "group": "Characters",
+  "tex": 848,
+  "ids": [
+   10
+  ]
+ },
+ {
+  "name": "Duke Goltanna",
+  "group": "Characters",
+  "tex": 850,
+  "ids": [
+   11
+  ]
+ },
+ {
+  "name": "Ovelia",
+  "group": "Characters",
+  "tex": 852,
+  "ids": [
+   12
+  ]
+ },
+ {
+  "name": "Orlandeau",
+  "group": "Characters",
+  "tex": 854,
+  "ids": [
+   13
+  ]
+ },
+ {
+  "name": "High Confessor Funebris",
+  "group": "Characters",
+  "tex": 856,
+  "ids": [
+   14
+  ]
+ },
+ {
+  "name": "Reis (human form)",
+  "group": "Characters",
+  "tex": 858,
+  "ids": [
+   15
+  ]
+ },
+ {
+  "name": "Zalmour",
+  "group": "Characters",
+  "tex": 860,
+  "ids": [
+   16
+  ]
+ },
+ {
+  "name": "Gaffgarion",
+  "group": "Characters",
+  "tex": 866,
+  "ids": [
+   17,
+   23
+  ]
+ },
+ {
+  "name": "Marach",
+  "group": "Characters",
+  "tex": 872,
+  "ids": [
+   18,
+   26
+  ]
+ },
+ {
+  "name": "Simon",
+  "group": "Characters",
+  "tex": 862,
+  "ids": [
+   19
+  ]
+ },
+ {
+  "name": "Alma",
+  "group": "Characters",
+  "tex": 907,
+  "ids": [
+   20,
+   48
+  ]
+ },
+ {
+  "name": "Orran",
+  "group": "Characters",
+  "tex": 864,
+  "ids": [
+   21
+  ]
+ },
+ {
+  "name": "Mustadio",
+  "group": "Characters",
+  "tex": 888,
+  "ids": [
+   22,
+   34
+  ]
+ },
+ {
+  "name": "Cardinal Delacroix",
+  "group": "Characters",
+  "tex": 868,
+  "ids": [
+   24
+  ]
+ },
+ {
+  "name": "Rapha",
+  "group": "Characters",
+  "tex": 870,
+  "ids": [
+   25,
+   41
+  ]
+ },
+ {
+  "name": "Elmdore",
+  "group": "Characters",
+  "tex": 874,
+  "ids": [
+   27
+  ]
+ },
+ {
+  "name": "Tietra",
+  "group": "Characters",
+  "tex": 876,
+  "ids": [
+   28
+  ]
+ },
+ {
+  "name": "Barrington",
+  "group": "Characters",
+  "tex": 878,
+  "ids": [
+   29
+  ]
+ },
+ {
+  "name": "Agrias",
+  "group": "Characters",
+  "tex": 914,
+  "ids": [
+   30,
+   52
+  ]
+ },
+ {
+  "name": "Beowulf",
+  "group": "Characters",
+  "tex": 882,
+  "ids": [
+   31
+  ]
+ },
+ {
+  "name": "Wiegraf (White Knight)",
+  "group": "Characters",
+  "tex": 884,
+  "ids": [
+   32
+  ]
+ },
+ {
+  "name": "Valmafra",
+  "group": "Characters",
+  "tex": 886,
+  "ids": [
+   33
+  ]
+ },
+ {
+  "name": "Ludovich",
+  "group": "Characters",
+  "tex": 890,
+  "ids": [
+   35
+  ]
+ },
+ {
+  "name": "Folmarv",
+  "group": "Characters",
+  "tex": 892,
+  "ids": [
+   36
+  ]
+ },
+ {
+  "name": "Loffrey",
+  "group": "Characters",
+  "tex": 894,
+  "ids": [
+   37
+  ]
+ },
+ {
+  "name": "Isilud",
+  "group": "Characters",
+  "tex": 896,
+  "ids": [
+   38
+  ]
+ },
+ {
+  "name": "Cletienne",
+  "group": "Characters",
+  "tex": 898,
+  "ids": [
+   39
+  ]
+ },
+ {
+  "name": "Wiegraf (Templar)",
+  "group": "Characters",
+  "tex": 900,
+  "ids": [
+   40
+  ]
+ },
+ {
+  "name": "Meliadoul",
+  "group": "Characters",
+  "tex": 905,
+  "ids": [
+   42,
+   47
+  ]
+ },
+ {
+  "name": "Barich",
+  "group": "Characters",
+  "tex": 902,
+  "ids": [
+   43
+  ]
+ },
+ {
+  "name": "Celia",
+  "group": "Characters",
+  "tex": 926,
+  "ids": [
+   45,
+   58
+  ]
+ },
+ {
+  "name": "Lettie",
+  "group": "Characters",
+  "tex": 928,
+  "ids": [
+   46,
+   59
+  ]
+ },
+ {
+  "name": "Cloud",
+  "group": "Characters",
+  "tex": 910,
+  "ids": [
+   50
+  ]
+ },
+ {
+  "name": "Zalbaag (undead)",
+  "group": "Characters",
+  "tex": 912,
+  "ids": [
+   51
+  ]
+ },
+ {
+  "name": "Squire (male)",
+  "group": "Generic jobs",
+  "tex": 992,
+  "ids": [
+   96
+  ]
+ },
+ {
+  "name": "Squire (female)",
+  "group": "Generic jobs",
+  "tex": 994,
+  "ids": [
+   97
+  ]
+ },
+ {
+  "name": "Chemist (male)",
+  "group": "Generic jobs",
+  "tex": 996,
+  "ids": [
+   98
+  ]
+ },
+ {
+  "name": "Chemist (female)",
+  "group": "Generic jobs",
+  "tex": 998,
+  "ids": [
+   99
+  ]
+ },
+ {
+  "name": "Knight (male)",
+  "group": "Generic jobs",
+  "tex": 1000,
+  "ids": [
+   61,
+   100
+  ]
+ },
+ {
+  "name": "Knight (female)",
+  "group": "Generic jobs",
+  "tex": 1002,
+  "ids": [
+   101
+  ]
+ },
+ {
+  "name": "Archer (male)",
+  "group": "Generic jobs",
+  "tex": 1004,
+  "ids": [
+   102
+  ]
+ },
+ {
+  "name": "Archer (female)",
+  "group": "Generic jobs",
+  "tex": 1006,
+  "ids": [
+   103
+  ]
+ },
+ {
+  "name": "Monk (male)",
+  "group": "Generic jobs",
+  "tex": 1008,
+  "ids": [
+   104
+  ]
+ },
+ {
+  "name": "Monk (female)",
+  "group": "Generic jobs",
+  "tex": 1010,
+  "ids": [
+   105
+  ]
+ },
+ {
+  "name": "White Mage (male)",
+  "group": "Generic jobs",
+  "tex": 1012,
+  "ids": [
+   106
+  ]
+ },
+ {
+  "name": "White Mage (female)",
+  "group": "Generic jobs",
+  "tex": 1014,
+  "ids": [
+   107
+  ]
+ },
+ {
+  "name": "Black Mage (male)",
+  "group": "Generic jobs",
+  "tex": 1016,
+  "ids": [
+   108
+  ]
+ },
+ {
+  "name": "Black Mage (female)",
+  "group": "Generic jobs",
+  "tex": 1018,
+  "ids": [
+   109
+  ]
+ },
+ {
+  "name": "Time Mage (male)",
+  "group": "Generic jobs",
+  "tex": 1020,
+  "ids": [
+   110
+  ]
+ },
+ {
+  "name": "Time Mage (female)",
+  "group": "Generic jobs",
+  "tex": 1022,
+  "ids": [
+   111
+  ]
+ },
+ {
+  "name": "Summoner (male)",
+  "group": "Generic jobs",
+  "tex": 1024,
+  "ids": [
+   112
+  ]
+ },
+ {
+  "name": "Summoner (female)",
+  "group": "Generic jobs",
+  "tex": 1026,
+  "ids": [
+   71,
+   113
+  ]
+ },
+ {
+  "name": "Thief (male)",
+  "group": "Generic jobs",
+  "tex": 1028,
+  "ids": [
+   114
+  ]
+ },
+ {
+  "name": "Thief (female)",
+  "group": "Generic jobs",
+  "tex": 1030,
+  "ids": [
+   115
+  ]
+ },
+ {
+  "name": "Orator (male)",
+  "group": "Generic jobs",
+  "tex": 1032,
+  "ids": [
+   116
+  ]
+ },
+ {
+  "name": "Orator (female)",
+  "group": "Generic jobs",
+  "tex": 1034,
+  "ids": [
+   117
+  ]
+ },
+ {
+  "name": "Mystic (male)",
+  "group": "Generic jobs",
+  "tex": 1036,
+  "ids": [
+   118
+  ]
+ },
+ {
+  "name": "Mystic (female)",
+  "group": "Generic jobs",
+  "tex": 1038,
+  "ids": [
+   119
+  ]
+ },
+ {
+  "name": "Geomancer (male)",
+  "group": "Generic jobs",
+  "tex": 1040,
+  "ids": [
+   120
+  ]
+ },
+ {
+  "name": "Geomancer (female)",
+  "group": "Generic jobs",
+  "tex": 1042,
+  "ids": [
+   121
+  ]
+ },
+ {
+  "name": "Dragoon (male)",
+  "group": "Generic jobs",
+  "tex": 1044,
+  "ids": [
+   122
+  ]
+ },
+ {
+  "name": "Dragoon (female)",
+  "group": "Generic jobs",
+  "tex": 1046,
+  "ids": [
+   123
+  ]
+ },
+ {
+  "name": "Samurai (male)",
+  "group": "Generic jobs",
+  "tex": 1048,
+  "ids": [
+   124
+  ]
+ },
+ {
+  "name": "Samurai (female)",
+  "group": "Generic jobs",
+  "tex": 1050,
+  "ids": [
+   125
+  ]
+ },
+ {
+  "name": "Ninja (male)",
+  "group": "Generic jobs",
+  "tex": 1052,
+  "ids": [
+   126
+  ]
+ },
+ {
+  "name": "Ninja (female)",
+  "group": "Generic jobs",
+  "tex": 1054,
+  "ids": [
+   127
+  ]
+ },
+ {
+  "name": "Arithmetician (male)",
+  "group": "Generic jobs",
+  "tex": 1056,
+  "ids": [
+   128
+  ]
+ },
+ {
+  "name": "Arithmetician (female)",
+  "group": "Generic jobs",
+  "tex": 1058,
+  "ids": [
+   129
+  ]
+ },
+ {
+  "name": "Bard",
+  "group": "Generic jobs",
+  "tex": 1060,
+  "ids": [
+   130
+  ]
+ },
+ {
+  "name": "Dancer",
+  "group": "Generic jobs",
+  "tex": 1062,
+  "ids": [
+   131
+  ]
+ },
+ {
+  "name": "Mime (male)",
+  "group": "Generic jobs",
+  "tex": 1064,
+  "ids": [
+   132
+  ]
+ },
+ {
+  "name": "Mime (female)",
+  "group": "Generic jobs",
+  "tex": 1066,
+  "ids": [
+   133
+  ]
+ }
+]
