@@ -55,6 +55,9 @@ Good to know:
   chapter's folder, that chapter uses its own file.
 - The same file can go in several folders if you want several characters to share it.
 - The sprite keeps its own colors. If it has several palettes, the extra ones are used as the alternate team colors.
+- Smoother edges: put the word "smooth" in the file name (for example "MySprite smooth.bmp") and the mod rounds the
+  jagged edges when it doubles the sprite, using only the sprite's own colors. It is an automatic filter and does not
+  compare to a sprite upscaled by hand by a spriter: it softens edges, it cannot add detail. Remove the word to go back.
 - The portrait in menus is not changed.
 - Folders starting with "Job - " are the generic jobs. They change every unit of that job and gender, yours and the
   enemy's.

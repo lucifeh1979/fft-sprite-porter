@@ -17,6 +17,7 @@ Downloads are on the [Releases](../../releases) page.
 - Keeps the sprite's own palette. A sprite does not have to reuse the colors of the character it replaces; extra unit palettes become the alternate team colors.
 - 43 named characters and every generic job.
 - Does not touch the art: the sheet is enlarged 2x, pixel by pixel, to fit the Enhanced format.
+- Optional smooth upscale (Scale2x) that rounds the jagged edges using only the sprite's own colors. It is a quick filter and does not compare to a sprite upscaled by hand: it softens edges, it cannot add detail.
 
 ## What it does not do
 

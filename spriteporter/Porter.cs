@@ -96,7 +96,7 @@ static class Porter {
     return -1;
   }
 
-  public static void BuildMod(Sheet sheet, IList<Character> chars, string modName, string author, string artist, string sheetName, string outZip) {
+  public static void BuildMod(Sheet sheet, IList<Character> chars, string modName, string author, string artist, string sheetName, string outZip, bool smooth = false) {
     if (chars.Count == 0) throw new Exception("Pick at least one character.");
     var ids = chars.SelectMany(c => c.ids).Distinct().OrderBy(i => i).ToList();
     int k = ids[0];
@@ -108,7 +108,7 @@ static class Porter {
     }
     var shape = (byte[])data["charshape.nxd"].Clone();
     foreach (int id in ids) BitConverter.GetBytes((uint)k).CopyTo(shape, shapeOffsets[id.ToString()]);
-    var (top, bottom) = sheet.ToHd();
+    var (top, bottom) = sheet.ToHd(smooth);
     string modId = "fftivc.sprite." + Slug(modName), who = string.Join(", ", chars.Select(c => c.name));
     var cfg = new JsonObject {
       ["ModId"] = modId, ["ModName"] = modName, ["ModAuthor"] = author, ["ModVersion"] = "1.0.0",

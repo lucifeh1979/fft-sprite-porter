@@ -1,7 +1,7 @@
 import os, json, zipfile
 
-VERSAO_MOD = '1.0.1'
-VERSAO_FERRAMENTA = '1.0.0'
+VERSAO_MOD = '1.1.0'
+VERSAO_FERRAMENTA = '1.1.0'
 AQUI = os.path.dirname(os.path.abspath(__file__))
 RAIZ = os.path.dirname(AQUI)
 SAIDA = os.path.join(RAIZ, 'compartilhar')

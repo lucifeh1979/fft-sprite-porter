@@ -84,13 +84,32 @@ partial class Sheet {
     return s;
   }
 
-  public (byte[] top, byte[] bottom) ToHd() {
-    var all = new byte[W * H * 2];
+  public byte[] HdPixels(bool smooth) {
+    const int W2 = W * 2;
+    var hd = new byte[W2 * H * 2];
+    byte At(int x, int y) => Pixels[Math.Clamp(y, 0, H - 1) * W + Math.Clamp(x, 0, W - 1)];
     for (int y = 0; y < H; y++)
       for (int x = 0; x < W; x++) {
-        byte v = Pixels[y * W + x], b = (byte)(v | v << 4);
-        all[(y * 2) * W + x] = b; all[(y * 2 + 1) * W + x] = b;
+        byte e = Pixels[y * W + x], e0 = e, e1 = e, e2 = e, e3 = e;
+        if (smooth) {
+          byte b = At(x, y - 1), d = At(x - 1, y), f = At(x + 1, y), h = At(x, y + 1);
+          if (b != h && d != f) {
+            if (d == b) e0 = d;
+            if (b == f) e1 = f;
+            if (d == h) e2 = d;
+            if (h == f) e3 = f;
+          }
+        }
+        int o = y * 2 * W2 + x * 2;
+        hd[o] = e0; hd[o + 1] = e1; hd[o + W2] = e2; hd[o + W2 + 1] = e3;
       }
+    return hd;
+  }
+
+  public (byte[] top, byte[] bottom) ToHd(bool smooth = false) {
+    var hd = HdPixels(smooth);
+    var all = new byte[hd.Length / 2];
+    for (int i = 0; i < all.Length; i++) all[i] = (byte)(hd[i * 2] | hd[i * 2 + 1] << 4);
     return (all[..131072], all[131072..]);
   }
 }

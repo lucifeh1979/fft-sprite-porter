@@ -3,11 +3,11 @@ using System.Drawing.Drawing2D;
 static class Program {
   [STAThread]
   static int Main(string[] args) {
-    if (args.Length == 7 && args[0] == "--cli") {
+    if ((args.Length == 7 || args.Length == 8) && args[0] == "--cli") {
       try {
         var sheet = Sheet.Load(args[1]);
         var chars = args[6].Split(';').Select(n => Porter.Characters.First(c => c.name == n)).ToList();
-        Porter.BuildMod(sheet, chars, args[3], args[4], args[5], Path.GetFileNameWithoutExtension(args[1]), args[2]);
+        Porter.BuildMod(sheet, chars, args[3], args[4], args[5], Path.GetFileNameWithoutExtension(args[1]), args[2], args.Length == 8 && args[7] == "smooth");
         File.WriteAllText(args[2] + ".log", string.Join("\n", chars.Select(c => { var f = Porter.Fit(sheet, c); return $"{c.name}: missing {f.missing:0.0} extra {f.extra:0.0}"; })) + $"\npalettes {sheet.PalettesInFile}\n");
         return 0;
       } catch (Exception e) { File.WriteAllText(args[2] + ".log", "ERROR " + e); return 1; }
@@ -24,6 +24,7 @@ class MainForm : Form {
   readonly CheckedListBox list = new() { CheckOnClick = true, IntegralHeight = false };
   readonly PictureBox preview = new() { BackColor = Color.FromArgb(200, 200, 210), BorderStyle = BorderStyle.FixedSingle, SizeMode = PictureBoxSizeMode.Zoom };
   readonly Label status = new() { AutoSize = false };
+  readonly CheckBox chkSmooth = new() { Text = "Smooth upscale (Scale2x)", AutoSize = true };
   readonly Button btnBrowse = new() { Text = "Browse..." }, btnCreate = new() { Text = "Create mod (.zip)..." };
   readonly HashSet<Character> selected = new();
   Sheet sheet; string sheetPath; bool nameEdited, filling;
@@ -49,7 +50,9 @@ class MainForm : Form {
     Add(new Label { Text = "Mod name" }, 540, 114, 268, 18); Add(txtName, 540, 134, 268, 23);
     Add(new Label { Text = "Your name (mod author)" }, 540, 164, 268, 18); Add(txtAuthor, 540, 184, 268, 23);
     Add(new Label { Text = "Sprite artist" }, 540, 214, 268, 18); Add(txtArtist, 540, 234, 268, 23);
-    Add(status, 540, 270, 268, 254);
+    Add(chkSmooth, 540, 266, 268, 20);
+    Add(new Label { Text = "Rounds the jagged edges when the sheet is doubled, using only the sprite's own colors. A quick filter: it does not compare to a sprite upscaled by hand.", ForeColor = SystemColors.GrayText }, 540, 288, 268, 48);
+    Add(status, 540, 344, 268, 180);
 
     Add(new Label { Text = "The zip installs like any other mod: drag it into Reloaded-II and enable it. It needs the FFTIVC Mod Loader. Portraits are not changed.", ForeColor = SystemColors.GrayText }, 12, 540, 620, 36);
     Add(btnCreate, 648, 540, 160, 34);
@@ -112,7 +115,7 @@ class MainForm : Form {
     using var d = new SaveFileDialog { Filter = "Zip|*.zip", FileName = string.Concat(name.Select(ch => Path.GetInvalidFileNameChars().Contains(ch) ? '-' : ch)).Replace(' ', '-') + "-1.0.0.zip", InitialDirectory = Path.GetDirectoryName(sheetPath) };
     if (d.ShowDialog(this) != DialogResult.OK) return;
     try {
-      Porter.BuildMod(sheet, Chosen(), name, txtAuthor.Text.Trim(), txtArtist.Text.Trim(), Path.GetFileNameWithoutExtension(sheetPath), d.FileName);
+      Porter.BuildMod(sheet, Chosen(), name, txtAuthor.Text.Trim(), txtArtist.Text.Trim(), Path.GetFileNameWithoutExtension(sheetPath), d.FileName, chkSmooth.Checked);
       MessageBox.Show(this, "Mod created:\r\n" + d.FileName + "\r\n\r\nDrag the zip into the Reloaded-II window, enable the mod and launch the game.", Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
     } catch (Exception e) { MessageBox.Show(this, e.Message, "Could not create the mod", MessageBoxButtons.OK, MessageBoxIcon.Error); }
   }

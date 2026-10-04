@@ -1,4 +1,4 @@
-FFT Sprite Porter 1.0.0
+FFT Sprite Porter 1.1.0
 Classic FFT sprite sheets -> Reloaded-II mods for FINAL FANTASY TACTICS - The Ivalice Chronicles (Enhanced version)
 
 WHAT IT DOES

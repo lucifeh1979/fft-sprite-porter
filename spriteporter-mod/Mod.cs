@@ -74,7 +74,8 @@ public class Mod : IMod
                         ?? throw new Exception("This .bmp uses a format this mod can't read (compressed or very old). Save it again as a plain 8-bit .bmp.");
                 }
                 catch (Exception e) { Log($"{Path.GetFileName(group.Key)}: skipped ({e.Message})"); continue; }
-                var (top, bottom) = sheet.ToHd();
+                bool smooth = Path.GetFileNameWithoutExtension(group.Key).Contains("smooth", StringComparison.OrdinalIgnoreCase);
+                var (top, bottom) = sheet.ToHd(smooth);
                 foreach (var c in group.Select(g => g.Key))
                 {
                     AddSheet(packs, cacheDir, c.tex, top);
@@ -82,7 +83,7 @@ public class Mod : IMod
                 }
                 var ids = group.SelectMany(g => g.Key.ids).Distinct().OrderBy(i => i).ToList();
                 palettes.Add((ids[0], sheet, ids));
-                Log($"{string.Join(", ", group.Select(g => g.Key.name))} <- {Path.GetFileName(group.Key)}" + (group.First().Value.owner == ModId ? "" : $" (from {group.First().Value.owner})"));
+                Log($"{string.Join(", ", group.Select(g => g.Key.name))} <- {Path.GetFileName(group.Key)}" + (smooth ? " (smooth)" : "") + (group.First().Value.owner == ModId ? "" : $" (from {group.First().Value.owner})"));
             }
             if (palettes.Count == 0) return;
             WritePalettes(packs, palettes);

@@ -11,10 +11,22 @@ Turn your FFT sprite into a mod for The Ivalice Chronicles in one minute.
 
 4. Type the mod name, your name and the sprite artist.
 
-5. Click "Create mod (.zip)".
+5. Optional: tick "Smooth upscale" to round the jagged edges (see below).
+
+6. Click "Create mod (.zip)".
 
 That zip is the finished mod. Upload it to Nexus as it is.
 Players drag it into Reloaded-II, enable it and play. They need nothing else from you.
+
+
+ABOUT "SMOOTH UPSCALE"
+
+The game's sheets are twice the size of the classic ones, so every pixel of your sprite becomes a 2x2 block.
+Smooth upscale is an automatic filter (Scale2x) that rounds the stair-step edges while doing that. It only reuses
+the colors already in your sprite, so the palette stays exactly yours.
+
+It is a shortcut, nothing more. A sprite upscaled by hand by a spriter is in another league: the filter cannot add
+detail, it only softens edges. Leave it off if you want every pixel exactly as you drew it.
 
 
 THREE THINGS TO KNOW
