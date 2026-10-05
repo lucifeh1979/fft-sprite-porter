@@ -2,7 +2,7 @@
   "ModId": "fftivc.utility.spriteporter",
   "ModName": "FFT Sprite Porter - Customize your Characters",
   "ModAuthor": "Lucifeh",
-  "ModVersion": "1.1.0",
+  "ModVersion": "1.2.0",
   "ModDescription": "Lets the Enhanced version use battle sprites made for the original game (the .bmp and .spr files shared on FFHacktics), with their own colors. Drop a sprite into the folder of the character you want inside this mod's Sprites folder (Open Folder), or install sprite mods that require this one. To go back to the original sprite, delete the file.",
   "ModDll": "fftivc.utility.spriteporter.dll",
   "ModIcon": "",
@@ -15,21 +15,38 @@
   "HasExports": false,
   "IsLibrary": false,
   "ReleaseMetadataFileName": "",
-  "IgnoreRegexes": [".*\\.json"],
-  "IncludeRegexes": ["ModConfig\\.json", "\\.deps\\.json"],
+  "IgnoreRegexes": [
+    ".*\\.json"
+  ],
+  "IncludeRegexes": [
+    "ModConfig\\.json",
+    "\\.deps\\.json"
+  ],
   "PluginData": {
     "GitHubDependencies": {
       "IdToConfigMap": {
         "fftivc.utility.modloader": {
-          "Config": { "UserName": "Nenkai", "RepositoryName": "fftivc.utility.modloader", "UseReleaseTag": true, "AssetFileName": "Mod.zip" },
+          "Config": {
+            "UserName": "Nenkai",
+            "RepositoryName": "fftivc.utility.modloader",
+            "UseReleaseTag": true,
+            "AssetFileName": "Mod.zip"
+          },
           "ReleaseMetadataName": "fftivc.utility.modloader.ReleaseMetadata.json"
         }
       }
     }
   },
   "IsUniversalMod": false,
-  "ModDependencies": ["fftivc.utility.modloader"],
-  "OptionalDependencies": [],
-  "SupportedAppId": ["fft_enhanced.exe"],
+  "ModDependencies": [
+    "fftivc.utility.modloader"
+  ],
+  "OptionalDependencies": [
+    "ffttic.jobs.genericjobs",
+    "WotLCharacters"
+  ],
+  "SupportedAppId": [
+    "fft_enhanced.exe"
+  ],
   "ProjectUrl": ""
 }

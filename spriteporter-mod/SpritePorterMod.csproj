@@ -25,6 +25,7 @@
   <ItemGroup>
     <Compile Include="..\spriteporter\SheetCore.cs" Link="SheetCore.cs" />
     <EmbeddedResource Include="..\spriteporter\data\characters.json" LogicalName="characters.json" />
+    <EmbeddedResource Include="extra_characters.json" LogicalName="extra_characters.json" />
     <None Include="$(ModLoaderDir)\Nex\Layouts\ffto\CharCLUT.layout" Link="Nex\Layouts\ffto\CharCLUT.layout" CopyToOutputDirectory="PreserveNewest" />
     <None Include="$(ModLoaderDir)\Nex\Layouts\ffto\CharShape.layout" Link="Nex\Layouts\ffto\CharShape.layout" CopyToOutputDirectory="PreserveNewest" />
     <None Include="ModConfig.json" CopyToOutputDirectory="PreserveNewest" />

@@ -22,6 +22,8 @@ public class Mod : IMod
         "\"Ramza (all chapters)\" and \"Delita (all chapters)\" apply to every chapter at once; a file in a single-chapter folder wins over them.\r\n" +
         "A sprite in these folders wins over a sprite that comes from another mod.\r\n" +
         "Folders starting with \"Job - \" are the generic jobs: they change every unit of that job and gender.\r\n" +
+        "The Dark Knight and Onion Knight folders show up while Dark Knight & Onion Knight (Generic) or WotL Restoration is enabled.\r\n" +
+        "Sprites are smoothed when doubled to the game's resolution. To keep the original jagged pixels, put \"nosmooth\" in the file name (for example \"MySprite nosmooth.bmp\").\r\n" +
         "Portraits are not changed.\r\n";
 
     ILogger _log;
@@ -37,7 +39,7 @@ public class Mod : IMod
             if (packs == null) { Log("FFT mod loader not found."); return; }
             if (packs.GameMode != FFTOGameMode.Enhanced) { Log("only the Enhanced version is supported."); return; }
 
-            var targets = LoadTargets();
+            var targets = LoadTargets(EnabledMods());
             var ownDir = Path.Combine(_loader.GetDirectoryForModId(ModId), SpritesDir);
             PrepareOwnFolder(ownDir, targets);
 
@@ -74,16 +76,16 @@ public class Mod : IMod
                         ?? throw new Exception("This .bmp uses a format this mod can't read (compressed or very old). Save it again as a plain 8-bit .bmp.");
                 }
                 catch (Exception e) { Log($"{Path.GetFileName(group.Key)}: skipped ({e.Message})"); continue; }
-                bool smooth = Path.GetFileNameWithoutExtension(group.Key).Contains("smooth", StringComparison.OrdinalIgnoreCase);
+                bool smooth = !Normalize(Path.GetFileNameWithoutExtension(group.Key)).Contains("nosmooth");
                 var (top, bottom) = sheet.ToHd(smooth);
                 foreach (var c in group.Select(g => g.Key))
                 {
                     AddSheet(packs, cacheDir, c.tex, top);
-                    AddSheet(packs, cacheDir, c.tex + 1, bottom);
+                    AddSheet(packs, cacheDir, c.tex + 1, c.mods == null ? bottom : [.. bottom, .. new byte[top.Length - bottom.Length]]);
                 }
                 var ids = group.SelectMany(g => g.Key.ids).Distinct().OrderBy(i => i).ToList();
                 palettes.Add((ids[0], sheet, ids));
-                Log($"{string.Join(", ", group.Select(g => g.Key.name))} <- {Path.GetFileName(group.Key)}" + (smooth ? " (smooth)" : "") + (group.First().Value.owner == ModId ? "" : $" (from {group.First().Value.owner})"));
+                Log($"{string.Join(", ", group.Select(g => g.Key.name))} <- {Path.GetFileName(group.Key)}" + (smooth ? "" : " (no smooth)") + (group.First().Value.owner == ModId ? "" : $" (from {group.First().Value.owner})"));
             }
             if (palettes.Count == 0) return;
             WritePalettes(packs, palettes);
@@ -108,27 +110,36 @@ public class Mod : IMod
         packs.AddModdedFile(ModId, FFTOGameMode.Enhanced, local, $"system/ffto/g2d/tex_{tex}.bin");
     }
 
-    List<(string owner, string dir)> SpriteModFolders()
+    List<string> EnabledMods()
     {
-        var found = new List<(string owner, string dir, int order)>();
+        try { return _loader.GetAppConfig().EnabledMods.ToList(); }
+        catch (Exception e) { Log("could not read the enabled mods: " + e.Message); return new List<string>(); }
+    }
+
+    List<(string id, string dir)> EnabledModFolders()
+    {
+        var found = new List<(string id, string dir, int order)>();
         try
         {
-            var enabled = _loader.GetAppConfig().EnabledMods.ToList();
+            var enabled = EnabledMods();
             var modsDir = Path.GetDirectoryName(_loader.GetDirectoryForModId(ModId).TrimEnd('\\', '/'));
             foreach (var dir in Directory.GetDirectories(modsDir))
             {
-                var sprites = Path.Combine(dir, SpritesDir); var config = Path.Combine(dir, "ModConfig.json");
-                if (!Directory.Exists(sprites) || !File.Exists(config)) continue;
+                var config = Path.Combine(dir, "ModConfig.json");
+                if (!File.Exists(config)) continue;
                 string id;
                 try { id = JsonDocument.Parse(File.ReadAllText(config)).RootElement.GetProperty("ModId").GetString(); }
                 catch { continue; }
                 int order = enabled.IndexOf(id);
-                if (id != ModId && order >= 0) found.Add((id, sprites, order));
+                if (id != ModId && order >= 0) found.Add((id, dir, order));
             }
         }
-        catch (Exception e) { Log("could not look for sprite mods: " + e.Message); }
-        return found.OrderBy(f => f.order).Select(f => (f.owner, f.dir)).ToList();
+        catch (Exception e) { Log("could not look through the mods folder: " + e.Message); }
+        return found.OrderBy(f => f.order).Select(f => (f.id, f.dir)).ToList();
     }
+
+    List<(string owner, string dir)> SpriteModFolders() =>
+        EnabledModFolders().Select(m => (m.id, Path.Combine(m.dir, SpritesDir))).Where(m => Directory.Exists(m.Item2)).ToList();
 
     class Target { public string Folder; public List<Character> Characters; }
 
@@ -136,10 +147,16 @@ public class Mod : IMod
 
     static string FolderFor(Character c) => c.group == "Generic jobs" ? "Job - " + c.name : c.name;
 
-    static Dictionary<string, Target> LoadTargets()
+    static List<Character> ReadCharacters(string resource)
     {
-        using var s = Assembly.GetExecutingAssembly().GetManifestResourceStream("characters.json");
-        var chars = JsonSerializer.Deserialize<List<Character>>(s);
+        using var s = Assembly.GetExecutingAssembly().GetManifestResourceStream(resource);
+        return JsonSerializer.Deserialize<List<Character>>(s);
+    }
+
+    static Dictionary<string, Target> LoadTargets(List<string> enabledMods)
+    {
+        var chars = ReadCharacters("characters.json");
+        chars.AddRange(ReadCharacters("extra_characters.json").Where(c => c.mods.Any(enabledMods.Contains)));
         var targets = new Dictionary<string, Target>();
         void Add(string folder, IEnumerable<Character> who) => targets[Normalize(folder)] = new Target { Folder = folder, Characters = who.ToList() };
         foreach (var c in chars) Add(FolderFor(c), new[] { c });
@@ -185,14 +202,40 @@ public class Mod : IMod
         var shape = new NexDataFile(); shape.Read(packs.GetFileData(FFTOGameMode.Enhanced, shapePath));
         var keyOf = palettes.SelectMany(p => p.ids.Select(id => (id, p.key))).ToDictionary(x => (uint)x.id, x => (uint)x.key);
         builder = new NexDataFileBuilder(shapeLayout);
+        var present = new HashSet<uint>();
         foreach (var r in shape.RowManager.GetAllRowInfos())
         {
             var cells = NexUtils.ReadRow(shapeLayout, shape.Buffer, r.RowDataOffset);
             if (keyOf.TryGetValue(r.Key, out var key)) cells[clutCol] = key;
             builder.AddRow(r.Key, r.Key2, r.Key3, cells, false);
+            present.Add(r.Key);
+        }
+        foreach (var (id, key) in keyOf.Where(k => !present.Contains(k.Key)).OrderBy(k => k.Key))
+        {
+            var cells = ShapeRowFromMods(nxd => nxd.RowManager.GetAllRowInfos().Where(r => r.Key == id).Select(r => NexUtils.ReadRow(shapeLayout, nxd.Buffer, r.RowDataOffset)).FirstOrDefault());
+            if (cells == null) { Log($"sprite {id}: no mod defines its shape, colors not applied."); continue; }
+            cells[clutCol] = key;
+            builder.AddRow(id, 0, 0, cells, false);
         }
         ms = new MemoryStream(); builder.Write(ms);
         packs.AddModdedFile(ModId, FFTOGameMode.Enhanced, shapePath, ms.ToArray());
+    }
+
+    List<object> ShapeRowFromMods(Func<NexDataFile, List<object>> read)
+    {
+        List<object> row = null;
+        foreach (var (_, dir) in EnabledModFolders())
+        {
+            var file = Path.Combine(dir, "FFTIVC", "data", "enhanced", "nxd", "charshape.nxd");
+            if (!File.Exists(file)) continue;
+            try
+            {
+                var nxd = new NexDataFile(); nxd.Read(File.ReadAllBytes(file));
+                row = read(nxd) ?? row;
+            }
+            catch (Exception e) { Log($"could not read {file}: {e.Message}"); }
+        }
+        return row;
     }
 
     public void Suspend() { }

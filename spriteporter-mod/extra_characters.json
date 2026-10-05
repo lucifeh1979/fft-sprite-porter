@@ -1,0 +1,6 @@
+[
+ { "name": "Dark Knight (male)", "group": "Generic jobs", "tex": 1110, "ids": [159], "mods": ["ffttic.jobs.genericjobs", "WotLCharacters"] },
+ { "name": "Dark Knight (female)", "group": "Generic jobs", "tex": 1112, "ids": [160], "mods": ["ffttic.jobs.genericjobs", "WotLCharacters"] },
+ { "name": "Onion Knight (male)", "group": "Generic jobs", "tex": 1114, "ids": [161], "mods": ["ffttic.jobs.genericjobs", "WotLCharacters"] },
+ { "name": "Onion Knight (female)", "group": "Generic jobs", "tex": 1116, "ids": [162], "mods": ["ffttic.jobs.genericjobs", "WotLCharacters"] }
+]

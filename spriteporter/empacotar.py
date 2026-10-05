@@ -1,6 +1,6 @@
-import os, json, zipfile
+import os, sys, json, zipfile
 
-VERSAO_MOD = '1.1.0'
+VERSAO_MOD = '1.2.0'
 VERSAO_FERRAMENTA = '1.1.0'
 AQUI = os.path.dirname(os.path.abspath(__file__))
 RAIZ = os.path.dirname(AQUI)
@@ -28,9 +28,10 @@ with zipfile.ZipFile(destino, 'w', zipfile.ZIP_DEFLATED) as arq:
         arq.writestr(zipfile.ZipInfo(f'{MOD_ID}/Sprites/{p}/'), b'')
 confere(destino)
 
-destino = os.path.join(SAIDA, f'FFT-Sprite-Porter-Mod-Maker-{VERSAO_FERRAMENTA}.zip')
-with zipfile.ZipFile(destino, 'w', zipfile.ZIP_DEFLATED) as arq:
-    for n in ('QUICK START.txt', 'README.txt'):
-        arq.write(os.path.join(AQUI, n), f'FFT Sprite Porter Mod Maker/{n}')
-    arq.write(os.path.join(AQUI, 'publish', 'FFTSpritePorter.exe'), 'FFT Sprite Porter Mod Maker/FFTSpritePorter.exe')
-confere(destino)
+if '--maker' in sys.argv:
+    destino = os.path.join(SAIDA, f'FFT-Sprite-Porter-Mod-Maker-{VERSAO_FERRAMENTA}.zip')
+    with zipfile.ZipFile(destino, 'w', zipfile.ZIP_DEFLATED) as arq:
+        for n in ('QUICK START.txt', 'README.txt'):
+            arq.write(os.path.join(AQUI, n), f'FFT Sprite Porter Mod Maker/{n}')
+        arq.write(os.path.join(AQUI, 'publish', 'FFTSpritePorter.exe'), 'FFT Sprite Porter Mod Maker/FFTSpritePorter.exe')
+    confere(destino)

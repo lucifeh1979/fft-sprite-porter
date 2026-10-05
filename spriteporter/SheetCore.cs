@@ -3,6 +3,7 @@ class Character {
   public string group { get; set; }
   public int tex { get; set; }
   public int[] ids { get; set; }
+  public string[] mods { get; set; }
   public override string ToString() => group == "Generic jobs" ? "[Job] " + name : name;
 }
 
