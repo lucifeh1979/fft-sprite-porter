@@ -15,7 +15,7 @@ Downloads are on the [Releases](../../releases) page.
 
 - Reads the 256x488 indexed `.bmp` sheets and the game's `.spr` files.
 - Keeps the sprite's own palette. A sprite does not have to reuse the colors of the character it replaces; extra unit palettes become the alternate team colors.
-- 43 named characters and every generic job. In the mod, also the Dark Knight and Onion Knight from [Dark Knight & Onion Knight (Generic)](https://github.com/cipherxof/FFTGenericJobs) or WotL Restoration, while one of them is enabled.
+- 43 named characters and every generic job. In the mod, also the Dark Knight and Onion Knight from [Dark Knight & Onion Knight (Generic)](https://github.com/cipherxof/FFTGenericJobs) or WotL Restoration, and Balthier and Luso from WotL Restoration, while those mods are enabled.
 - Does not touch the art: the sheet is enlarged 2x, pixel by pixel, to fit the Enhanced format.
 - Smooth upscale (Scale2x) that rounds the jagged edges using only the sprite's own colors. It is a quick filter and does not compare to a sprite upscaled by hand: it softens edges, it cannot add detail. In the mod it is on by default; put `nosmooth` in the file name to keep the original pixels. In the Mod Maker it is a checkbox.
 
@@ -49,7 +49,7 @@ See [`spriteporter/QUICK START.txt`](spriteporter/QUICK%20START.txt).
 
 - A character's sheet lives in two `g2d` slots (`tex_N.bin` 512x512 and `tex_N+1.bin` 512x464, 4bpp, low nibble = left pixel). The classic 256x488 sheet is doubled to 512x976 and split across them.
 - Only Ramza has palette rows in the `CharCLUT` table. For everyone else `CharShape` points at palette 0 and the colors come from elsewhere, so the sprite's palettes are added as new `CharCLUT` rows and the character's `CharShape` row is pointed at them. The mod loader merges both tables cell by cell.
-- Sprites added by other mods (Dark Knight, Onion Knight: ids 159-162, slots 1110-1117) have no `CharShape` row in the base game. The mod copies the row from the enabled mod that adds it and points it at the new palette.
+- Sprites added by other mods (Dark Knight, Onion Knight, Balthier, Luso: ids 159-164, slots 1110-1121) have no `CharShape` row in the base game. The mod copies the row from the enabled mod that adds it and points it at the new palette.
 - The table that maps each sprite id to its `g2d` slot was read from the game executable and is stored in [`spriteporter/sprite_table.json`](spriteporter/sprite_table.json).
 - The `.spr` reader (palettes, the 288 raw rows, the nibble run-length compression of the last 200 rows) is in [`spriteporter/SheetCore.cs`](spriteporter/SheetCore.cs).
 

@@ -64,6 +64,7 @@ Good to know:
   enemy's.
 - Dark Knight and Onion Knight folders appear while Dark Knight & Onion Knight (Generic) or WotL Restoration is enabled
   (launch the game once after enabling it).
+- Balthier and Luso folders appear while WotL Restoration is enabled (launch the game once after enabling it).
 
 
 PART 3 - REMOVE A SPRITE

@@ -23,6 +23,7 @@ public class Mod : IMod
         "A sprite in these folders wins over a sprite that comes from another mod.\r\n" +
         "Folders starting with \"Job - \" are the generic jobs: they change every unit of that job and gender.\r\n" +
         "The Dark Knight and Onion Knight folders show up while Dark Knight & Onion Knight (Generic) or WotL Restoration is enabled.\r\n" +
+        "The Balthier and Luso folders show up while WotL Restoration is enabled.\r\n" +
         "Sprites are smoothed when doubled to the game's resolution. To keep the original jagged pixels, put \"nosmooth\" in the file name (for example \"MySprite nosmooth.bmp\").\r\n" +
         "Portraits are not changed.\r\n";
 
