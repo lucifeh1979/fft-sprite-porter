@@ -182,6 +182,7 @@ public class Mod : IMod
 
         var clutLayout = TableMappingReader.ReadTableLayout("CharCLUT", new Version(1, 0, 0), "ffto");
         int dataCol = clutLayout.Columns.Keys.ToList().IndexOf("CLUTData");
+        int skinCol = clutLayout.Columns.Keys.ToList().IndexOf("CharaColorSkinId");
         var clut = new NexDataFile(); clut.Read(packs.GetFileData(FFTOGameMode.Enhanced, clutPath));
         var rows = new SortedDictionary<(uint, uint), List<object>>();
         foreach (var r in clut.RowManager.GetAllRowInfos()) rows[(r.Key, r.Key2)] = NexUtils.ReadRow(clutLayout, clut.Buffer, r.RowDataOffset);
@@ -191,6 +192,7 @@ public class Mod : IMod
             {
                 var cells = rows.TryGetValue(((uint)key, v), out var existing) ? existing : new List<object>(template);
                 cells[dataCol] = (byte[])sheet.Palettes[v].Clone();
+                cells[skinCol] = 0;
                 rows[((uint)key, v)] = cells;
             }
         var builder = new NexDataFileBuilder(clutLayout);

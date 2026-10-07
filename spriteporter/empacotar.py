@@ -1,6 +1,6 @@
 import os, sys, json, zipfile
 
-VERSAO_MOD = '1.3.0'
+VERSAO_MOD = '1.3.1'
 VERSAO_FERRAMENTA = '1.1.0'
 AQUI = os.path.dirname(os.path.abspath(__file__))
 RAIZ = os.path.dirname(AQUI)

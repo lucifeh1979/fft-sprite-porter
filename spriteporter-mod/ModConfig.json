@@ -2,7 +2,7 @@
   "ModId": "fftivc.utility.spriteporter",
   "ModName": "FFT Sprite Porter - Customize your Characters",
   "ModAuthor": "Lucifeh",
-  "ModVersion": "1.3.0",
+  "ModVersion": "1.3.1",
   "ModDescription": "Lets the Enhanced version use battle sprites made for the original game (the .bmp and .spr files shared on FFHacktics), with their own colors. Drop a sprite into the folder of the character you want inside this mod's Sprites folder (Open Folder), or install sprite mods that require this one. To go back to the original sprite, delete the file.",
   "ModDll": "fftivc.utility.spriteporter.dll",
   "ModIcon": "",
