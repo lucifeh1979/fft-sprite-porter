@@ -66,8 +66,8 @@ if __name__ == '__main__':
         ent = clut0; sai = os.path.join(OUT, f'clut_{k}.nxd')
         for v in range(VARIANTES):
             cores = ','.join(str(x) for x in marcador(v))
-            if k <= 3 and v <= 3: nxd('set', 'CharCLUT', ent, tmp, f'{k}.{v}', 'CLUTData', cores)
-            else: nxd('addrow', 'CharCLUT', ent, tmp, '1', '0', str(k), str(v), 'CLUTData', cores)
+            if k <= 3 and v <= 3: nxd('set', 'CharCLUT', ent, tmp, f'{k}.{v}', 'CLUTData', cores, f'{k}.{v}', 'CharaColorSkinId', '0')
+            else: nxd('addrow', 'CharCLUT', ent, tmp, '1', '0', str(k), str(v), 'CLUTData', cores, 'CharaColorSkinId', '0')
             os.replace(tmp, sai); ent = sai
         d = open(sai, 'rb').read()
         assert all(d.count(marcador(v)) == 1 for v in range(VARIANTES)), k
