@@ -29,11 +29,13 @@ public class Mod : IMod
 
     ILogger _log;
     IModLoader _loader;
+    volatile bool _packLoaded;
 
     public void StartEx(IModLoaderV1 loaderApi, IModConfigV1 modConfig)
     {
         _loader = (IModLoader)loaderApi;
         _log = (ILogger)_loader.GetLogger();
+        _log.OnPrintMessage += (_, text) => { if (text != null && text.Contains("successfully loaded modded pack")) _packLoaded = true; };
         try
         {
             _loader.GetController<IFFTOModPackManager>().TryGetTarget(out var packs);
@@ -90,11 +92,41 @@ public class Mod : IMod
             }
             if (palettes.Count == 0) return;
             WritePalettes(packs, palettes);
+            WarnIfPackNotLoaded();
         }
         catch (Exception e) { Log("error: " + e); }
     }
 
     void Log(string msg) => _log.WriteLine($"[FFT Sprite Porter] {msg}");
+
+    void WarnIfPackNotLoaded()
+    {
+        Task.Run(async () =>
+        {
+            await Task.Delay(20000);
+            if (_packLoaded || PackFileInUse()) return;
+            foreach (var line in new[]
+            {
+                "WARNING: the game did not load the mod pack, so the new sprites will show up with the WRONG COLORS.",
+                "Reloaded-II got into the game too late (Auto Inject, or the game was started before Reloaded-II).",
+                "Fix: in Reloaded-II use Edit Application > Advanced Tools & Options > Deploy ASI Loader, turn Auto Inject off and start the game again",
+                "(the same fix as the \"Dark Knight Crash Fix\" page on Nexus Mods).",
+            })
+                _log.WriteLine($"[FFT Sprite Porter] {line}", _log.ColorRed);
+        });
+    }
+
+    static bool PackFileInUse()
+    {
+        try
+        {
+            var pack = Path.Combine(Path.GetDirectoryName(Environment.ProcessPath), "data", "enhanced", "modded.pac");
+            if (!File.Exists(pack)) return false;
+            using var probe = new FileStream(pack, FileMode.Open, FileAccess.Read, FileShare.None);
+            return false;
+        }
+        catch { return true; }
+    }
 
     string PrepareCache()
     {

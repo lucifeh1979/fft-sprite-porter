@@ -19,6 +19,10 @@ Downloads are on the [Releases](../../releases) page.
 - Does not touch the art: the sheet is enlarged 2x, pixel by pixel, to fit the Enhanced format.
 - Smooth upscale (Scale2x) that rounds the jagged edges using only the sprite's own colors. It is a quick filter and does not compare to a sprite upscaled by hand: it softens edges, it cannot add detail. In the mod it is on by default; put `nosmooth` in the file name to keep the original pixels. In the Mod Maker it is a checkbox.
 
+## Wrong colors?
+
+If a replaced sprite shows up painted with the old character's colors, the game did not load the mod pack. It happens when Reloaded-II gets into the game too late (Auto Inject, or the game started before Reloaded-II). The mod writes a warning in the Reloaded-II log when it detects this. To fix it, in Reloaded-II use **Edit Application > Advanced Tools & Options > Deploy ASI Loader**, turn **Auto Inject** off and start the game again.
+
 ## What it does not do
 
 - Portraits are not changed.
